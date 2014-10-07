@@ -1,6 +1,4 @@
 // start everything
-var Event = require('./event.js');
-var Cell = require('./cell.js');
 var Grid = require('./grid.js');
 
 window.onload =

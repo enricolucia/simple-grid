@@ -1,5 +1,7 @@
 html {
-  background : #ccc;
+  background : #fff;
+  padding : 0;
+  margin : 0;
 }
 
 body{
@@ -9,37 +11,41 @@ body{
   padding : 0;
 }
 
+#timer{
+  position : fixed;
+  height : 10%;
+  width : 100%;
+  bottom : 0%; 
+  margin : 0 auto;
+  float : left;
+  text-align : center;
+  z-index : 2;
+}
+
 #container{
-  #grid {
+  position : relative;
+
+  #grid{ 
+    margin : auto;
+    display : none;
     position : absolute;
     top : 0;
     left : 0;
-    bottom : 0;
     right : 0;
-    margin : auto;
-    display:block;
+
+    &.loaded{
+      display : block;
+    }
 
     .cell{
-      position : relative;
-      width : 100px;
-      height : 100px;
       margin : 0;
       padding : 0;
-      border : 1px solid #ccc;
+      border : 1px solid #fff;
       background : #fff;
       float : left;
       cursor : pointer;
       &.random{
         opacity : 0.9;
-      }
-      span{
-        margin : auto;
-        position: absolute;
-        width : 20%;
-        height : 20%;
-        display : none;
-        top : 0; left : 0; bottom : 0; right : 0;
-        text-align: center;
       }
     }
   }
