@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+var app = require('../server');
+
+app.listen(process.env.PORT || 3000, function() {
+  console.log('Express server listening on port ' + process.env.PORT || 3000);
+});
