@@ -4,5 +4,5 @@ var Grid = require('./grid.js');
 window.onload =
 function(){
  console.log('all started slasli');
- var grid = new Grid(6);
+ var grid = new Grid(2);
 };
