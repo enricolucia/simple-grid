@@ -5,32 +5,24 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     server = require('http').Server(app),
-    mongoose = require('mongoose'),
-    db = mongoose.connect('mongodb://localhost/grid');
+    mongoose = require('mongoose');
 
-
+mongoose.connect('mongodb://localhost/grid');
 // Mongoose Schema
 var Schema = mongoose.Schema;
 var ScoreSchema = new Schema({
   score : Number,
   player : String
-},{
-  collection : 'score'
-});
-
+},{ collection : 'score' });
 // Mongoose Model definition
-
 var User = mongoose.model('score', ScoreSchema);
 
-
-
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
 app.set('views', __dirname + '/views/');
 app.set('view engine', 'ejs');
 // server static file
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/score', function(req, res) {
@@ -40,9 +32,9 @@ app.post('/score', function(req, res) {
   };
 console.log(e);
   var userDoc  = new User(e);
-  userDoc.save(function(err) {
+  userDoc.save(function(err, result) {
     if (!err) {
-      res.json(userDoc);
+      res.json(result);
     } else {
       res.status(404).send('nothing to see here...');
     }
@@ -50,13 +42,18 @@ console.log(e);
 });
 
 app.put('/score/:id', function(req, res) {
-  var e = {
-    score : parseInt(req.params.score, 10),
-  };
+var e = {
+  score : req.body.score,
+  player : req.body.player
+};
 
-  User.updateById( { id : parseInt(req.params.id, 10) }, e, function(err, score){
+  var userDoc = new User(e);
+  userDoc.update({ _id : req.params.id }, function(err) {
+    console.log(arguments);
     if (!err) {
-      res.json(score);
+      res.json(e);
+    } else {
+      res.status(404).send(err);
     }
   });
 });

@@ -24,14 +24,14 @@ Manager.prototype.stop = function(){
   this.modal.classList.add('hidden');
 };
 
-Manager.prototype.handler = function(context, e){
+Manager.prototype.handler = function(revealCell, e){
   switch (e.detail) {
     case 'timeout' :
       this.modal.titleTag.textContent = 'Timeout!';
       this.modal.contentTag.textContent = 'You suck soooo bad!';
       this.modal.submit.textContent = 'Retry';
       this.getListener('timeout');
-      context.revealCell();
+      revealCell();
       break;
     case 'completed' :
       this.modal.titleTag.textContent = 'You got it right!';

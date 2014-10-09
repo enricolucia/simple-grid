@@ -5,18 +5,30 @@ var Score = function(){
 };
 
 Score.prototype.setPlayer = function(score){
-  if (!score){
-    this.playerName = prompt('Ma ghi sei?');
+  var e;
+  if (!score) {
+    this.playerName = prompt('Player name?');
+    while (!this.playerName) {
+      this.playerName = prompt('Player name?');
+    }
+    e = {
+      score : score || 0,
+      player : this.playerName
+    };
+    this.method = 'POST';
+  } else {
+    this.url += '/' + this.playerStats._id;
+    this.method = 'PUT';
   }
-  var e = {
-    score : score || 0,
-    player : this.playerName
-  };
-  this.setXhr('POST',this.getScore , JSON.stringify(e));
+
+  this.setXhr(this.method ,this.getScore , 
+    JSON.stringify(e || this.playerStats));
+  e = 0;
 };
 
 Score.prototype.getScore = function(data) {
-  console.log(data.score);
+  this.playerStats = data;
+  console.log(this.playerStats);
 };
 
 Score.prototype._getJSON = function(callback) {
@@ -27,13 +39,13 @@ Score.prototype._getJSON = function(callback) {
 };
 
 Score.prototype.render = function(timelapse){
-  var oldScore = parseInt(this.get(),10);
-  this.setPlayer(oldScore + timelapse);
+  this.playerStats.score += timelapse;
+  this.setPlayer(parseInt(this.playerStats.score, 10));
 };
 
 Score.prototype.setXhr = function(method, callback, data){
   this.xhr = new XMLHttpRequest();
-  this.xhr.onload = this._getJSON(callback.bind(this));
+  this.xhr.onload = this._getJSON.bind(this, callback.bind(this));
   this.xhr.open(method, this.url);
   this.xhr.setRequestHeader('Content-Type','application/json');
   this.xhr.send(data || null);

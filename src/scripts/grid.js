@@ -11,7 +11,7 @@ var Grid = function(cells) {
   this.gridEl = doc.createElement('div');
   this.gridEl.id = 'grid';
   this.manager = new Manager();
-  this.timer = new Timer(9000000);
+  this.timer = new Timer(90000);
   this.manager.stop();
   this.score = new Score();
   this._boundCellClicked = this.cellClicked.bind(this);
@@ -19,7 +19,7 @@ var Grid = function(cells) {
 
 // Listener
   this.timer.timerEl.addEventListener('status',
-    this.manager.handler.bind(this.manager, this));
+    this.manager.handler.bind(this.manager, this.revealCell.bind(this)));
 
   this.manager.modal.addEventListener('nextLevel',
     this.nextLevel.bind(this));
