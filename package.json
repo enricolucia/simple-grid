@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "body-parser": "^1.9.0",
     "browserify": "^5.12.0",
     "del": "^0.1.3",
     "ejs": "*",
@@ -33,7 +34,6 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "mongoose": "^3.8.17",
     "nodemon": "^1.2.1",
-    "socket.io": "^1.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "*"
   }

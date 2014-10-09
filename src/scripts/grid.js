@@ -6,14 +6,14 @@ var Score = require('./score.js');
 var doc = document,
     win = window;
 
-var Grid = function(cells){
+var Grid = function(cells) {
   this.container = doc.getElementById('container');
   this.gridEl = doc.createElement('div');
   this.gridEl.id = 'grid';
   this.manager = new Manager();
-  this.timer = new Timer(1);
-  this.score = new Score();
+  this.timer = new Timer(9000000);
   this.manager.stop();
+  this.score = new Score();
   this._boundCellClicked = this.cellClicked.bind(this);
   this.perfectSquare(cells);
 
@@ -26,7 +26,6 @@ var Grid = function(cells){
 
   this.manager.modal.addEventListener('retry',
     this.retry.bind(this));
-
 };
 
 Grid.prototype.nextLevel = function(){
