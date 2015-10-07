@@ -11,7 +11,7 @@ var Grid = function(cells) {
   this.gridEl = doc.createElement('div');
   this.gridEl.id = 'grid';
   this.manager = new Manager();
-  this.timer = new Timer(90000);
+  this.timer = new Timer(60);
   this.manager.stop();
   this.score = new Score();
   this._boundCellClicked = this.cellClicked.bind(this);
